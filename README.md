@@ -1,4 +1,4 @@
-![Image](assets/tera_preto.png =250x250)
+<img src="assets/tera_preto.png" height="300em" />
 
 # Mercado Tera
 
