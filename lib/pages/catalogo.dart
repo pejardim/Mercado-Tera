@@ -1,3 +1,4 @@
+import 'package:Tera/pages/pagamento.dart';
 import 'package:flutter/material.dart';
 
 class CatalogoPage extends StatelessWidget {
@@ -23,7 +24,7 @@ class CatalogoPage extends StatelessWidget {
           ),
           Image.asset(
             'assets/tera_laranja.png',
-            height: 200,
+            height: 125,
             fit: BoxFit.fill,
           ),
           Padding(
@@ -33,22 +34,26 @@ class CatalogoPage extends StatelessWidget {
               style: TextStyle(color: Colors.black.withOpacity(0.6)),
             ),
           ),
-          ButtonBar(
-            alignment: MainAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              FlatButton(
-                textColor: Theme.of(context).primaryColor,
-                onPressed: () {
-                  // Perform some action
-                },
-                child: const Text('botao 1 '),
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(icon: Icon(Icons.remove), onPressed: null),
+                  Text("0"),
+                  IconButton(icon: Icon(Icons.add), onPressed: null),
+                ],
+              ),
+              SizedBox(
+                width: 1,
               ),
               FlatButton(
                 textColor: Theme.of(context).primaryColor,
                 onPressed: () {
                   // Perform some action
                 },
-                child: const Text('botao 2'),
+                child: const Text('Adicionar ao carrinho'),
               ),
             ],
           ),
@@ -60,25 +65,26 @@ class CatalogoPage extends StatelessWidget {
   Widget _drawerCatalogo() {
     return ListView(
       children: const <Widget>[
-        DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.orange,
-          ),
-          child: Text(
-            'Dados do usuario',
-            style: TextStyle(
-              color: Colors.green,
-              fontSize: 24,
-            ),
+        UserAccountsDrawerHeader(
+          accountName: Text("Pedro Jardim"),
+          accountEmail: Text("pedro.jardim@yahoo.com"),
+          currentAccountPicture: CircleAvatar(
+            radius: 30.0,
+            backgroundImage: NetworkImage(
+                'https://cdn3.iconfinder.com/data/icons/user-avatar-7/512/397_Avatar_User_Basic-512.png'),
+            backgroundColor: Colors.transparent,
           ),
         ),
         ListTile(
+          leading: Icon(Icons.shopping_cart),
           title: Text('Carrinho'),
         ),
         ListTile(
+          leading: Icon(Icons.credit_card),
           title: Text('Formas de pagamento'),
         ),
         ListTile(
+          leading: Icon(Icons.info),
           title: Text('Quem somos'),
         ),
       ],
@@ -110,6 +116,12 @@ class CatalogoPage extends StatelessWidget {
         children: [
           _listaCatalogo(context, "Batata doce", "Legume",
               "A batata-doce, também chamada batata-da-terra, batata-da-ilha, jatica e jetica, é uma planta da família das convolvuláceas, da ordem das Solanales. Originária dos Andes, se espalhou pelos trópicos e subtrópicos de todo o mundo"),
+          _listaCatalogo(context, "Banana", "Fruta",
+              "Rica em vitamina D, é uma fruta essencial para aqueles que praticam exercicio fisico"),
+          _listaCatalogo(context, "Abacate", "Fruta",
+              "Ja diria a vovo jujuba, abacate faz muito bem para voce :)"),
+          _listaCatalogo(context, "Melancia", "Fruta",
+              "Originária da África, a melancia é rica em água, o que a torna muito refrescante. Possui açúcar, cálcio, fósforo e ferro e apresenta capacidade antioxidante e anti-inflamatória."),
         ],
       )),
       floatingActionButton: FloatingActionButton(
@@ -117,6 +129,8 @@ class CatalogoPage extends StatelessWidget {
         child: Icon(Icons.shopping_cart),
         onPressed: () {
           print("ir para pagina de carrinho");
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => PagamentoPage()));
         },
         backgroundColor: Theme.of(context).primaryColor,
       ),
